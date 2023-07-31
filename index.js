@@ -1,6 +1,7 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
+import "dotenv/config";
 
 const app = express();
 const port = 3000;
@@ -14,12 +15,11 @@ app.get("/", (req, res) => {
     res.render("index");
 })
 
+const apiKey = process.env.KEY;
+
 app.post("/", async (req, res) => {
     let query = req.body["city"];
-    //const code = 800;
-    const apiKey = process.env.KEY;
     const url1 = "https://api.openweathermap.org/data/2.5/weather?&q=" + query + "&" + "appid=" + apiKey + "&units=metric";
-    //const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const nameCapitalized = query.charAt(0).toUpperCase() + query.slice(1).toLowerCase();
 
     try {
